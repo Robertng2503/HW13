@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const Sequelize = require('sequelize');
 
 const sequelize = process.env.JAWSDB_URL
@@ -11,5 +10,15 @@ const sequelize = process.env.JAWSDB_URL
         decimalNumbers: true,
       },
     });
+
+// Attempt to authenticate the database connection
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Database connection has been established successfully.');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 module.exports = sequelize;
